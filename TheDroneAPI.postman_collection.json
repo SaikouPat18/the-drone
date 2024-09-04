@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "f175a8c8-02c7-4743-aa70-9560d7035fb5",
+		"name": "TheDroneAPI",
+		"description": "The Drone Delivery System is a Java application designed to manage and operate drones for urgent package delivery, specifically medications. The application allows for the registration of drones, loading of medications, checking loaded medications, and checking drone availability and battery status.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28320767",
+		"_collection_link": "https://www.postman.com/jamespatrick-10f7nzzmotjkj/workspace/sample-api/collection/28320767-f175a8c8-02c7-4743-aa70-9560d7035fb5?action=share&source=collection_link&creator=28320767"
+	},
+	"item": [
+		{
+			"name": "Register Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"serialNumber\": \"DRONE011\",\r\n    \"model\": \"LIGHTWEIGHT\",\r\n    \"batteryCapacity\": 100,\r\n    \"state\": \"IDLE\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}",
+					"host": [
+						"{{API_URL}}"
+					]
+				},
+				"description": "**Method:**  \n`POST`\n\n**Description:**  \nRegister a new drone by providing the drone's details. This endpoint creates a new drone entry in the system.\n\n**Request Body Parameters:**\n\n- `serialNumber` (string): Unique identifier for the drone.\n    \n- `model` (string): Model of the drone. Should be one of \"LIGHTWEIGHT\", \"MIDDLEWEIGHT\", \"CRUISERWEIGHT\", or \"HEAVYWEIGHT\".\n    \n- `weightLimit` (integer): Maximum weight the drone can carry (in grams).\n    \n- `batteryCapacity` (integer): Battery capacity of the drone (in percentage).\n    \n- `state` (string): Current state of the drone. Should be one of \"IDLE\", \"LOADING\", \"LOADED\", \"DELIVERING\", \"DELIVERED\", or \"RETURNING\".\n    \n\n**Success Response:**\n\n- **Code:** 201 Created\n    \n- **Content:** Returns the registered drone object with an assigned ID.\n    \n\n**Error Response:**\n\n- **Code:** 400 Bad Request\n    \n- **Content:** If the request body is invalid or missing required fields."
+			},
+			"response": []
+		},
+		{
+			"name": "Load Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Aspirin\",\r\n    \"weight\": 200,\r\n    \"code\": \"MED_001\",\r\n    \"image\": \"http://example.com/images/aspirin.png\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/{droneId}/load",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"{droneId}",
+						"load"
+					]
+				},
+				"description": "**Method:**  \n`POST`\n\n**Description:**  \nLoad medication into the specified drone. This endpoint updates the drone's state and adds the medication to the drone.\n\n**Request Body Parameters:**\n\n- `name` (string): Name of the medication.\n    \n- `weight` (integer): Weight of the medication (in grams).\n    \n- `code` (string): Unique code for the medication.\n    \n- `image` (string): URL or base64 encoded image of the medication.\n    \n\n**Success Response:**\n\n- **Code:** 200 OK\n    \n- **Content:** Returns the updated drone object with the medication loaded.\n    \n\n**Error Response:**\n\n- **Code:** 400 Bad Request\n    \n- **Content:** If the medication cannot be loaded (e.g., drone battery too low, overweight)."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Loaded Medications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/{droneId}/medications",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"{droneId}",
+						"medications"
+					]
+				},
+				"description": "**Method:**  \n`GET`\n\n**Description:**  \nRetrieve a list of medications currently loaded in the specified drone.\n\n**Path Parameter:**\n\n- `droneId`: The ID of the drone to load medication onto.\n    \n\n**Success Response:**\n\n- **Code:** 200 OK\n    \n- **Content:** A list of medications in JSON format.\n    \n\n**Error Response:**\n\n- **Code:** 404 Not Found\n    \n- **Content:** If the specified drone does not exist."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Available Drones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/available",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"available"
+					]
+				},
+				"description": "**Method:**  \n`GET`\n\n**Description:**  \nRetrieve a list of drones that are currently available for loading. A drone is considered available if it is in the \"IDLE\" state and has sufficient battery capacity.\n\n**Success Response:**\n\n- **Code:** 200 OK\n    \n- **Content:** A list of available drones in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Drone Battery Level",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/{droneId}/battery",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"{droneId}",
+						"battery"
+					]
+				},
+				"description": "**Method:**  \n`GET`\n\n**Description:**  \nRetrieve the battery level of the specified drone.\n\n**Path Parameter:**\n\n- `droneId`: The ID of the drone to load medication onto.\n    \n\n**Success Response:**\n\n- **Code:** 200 OK\n    \n- **Content:** The battery level of the drone (in percentage).\n    \n\n**Error Response:**\n\n- **Code:** 404 Not Found\n    \n- **Content:** If the specified drone does not exist."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": "http://localhost:8080/api/drones",
+			"type": "string"
+		}
+	]
+}
