@@ -1,0 +1,62 @@
+[
+    {
+        "serialNumber": "DRONE001",
+        "model": "LIGHTWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE002",
+        "model": "MIDDLEWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE003",
+        "model": "CRUISERWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE004",
+        "model": "HEAVYWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE005",
+        "model": "LIGHTWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE006",
+        "model": "MIDDLEWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE007",
+        "model": "CRUISERWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE008",
+        "model": "HEAVYWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE009",
+        "model": "LIGHTWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    },
+    {
+        "serialNumber": "DRONE010",
+        "model": "MIDDLEWEIGHT",
+        "batteryCapacity": 100,
+        "state": "IDLE"
+    }
+]
